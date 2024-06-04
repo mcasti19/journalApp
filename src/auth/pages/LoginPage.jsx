@@ -9,6 +9,11 @@ import { AuthLayout } from "../layout/AuthLayout";
 import { startGitHubSignIn, startGoogleSignIn, startLoginWithEmail } from "../../store/auth";
 
 
+const formData = {
+    email: '',
+    password: '',
+}
+
 export const LoginPage = () => {
     const dispatch = useDispatch();
 
@@ -16,10 +21,7 @@ export const LoginPage = () => {
 
     const isAuthenticated = useMemo( () => status === 'checking', [status] );
 
-    const { email, password, onInputChange, formState } = useForm( {
-        email: '',
-        password: '',
-    } );
+    const { email, password, onInputChange, formState } = useForm( formData );
 
 
     const onSubmit = ( event ) => {

@@ -1,10 +1,12 @@
-import { TurnedInNot, TurnedInOutlined } from "@mui/icons-material"
-import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
 import { useSelector } from "react-redux";
+import { Box, Divider, Drawer, List, Toolbar, Typography } from "@mui/material"
+import { SideBarItem } from "./SideBarItem";
 
 
-const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+// const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 export const SideBar = ( { drawerWidth = 240 } ) => {
+
+    const { notes = [] } = useSelector( state => state.journal );  // console.log( notes );
 
     const { displayName } = useSelector( state => state.auth )
 
@@ -13,7 +15,6 @@ export const SideBar = ( { drawerWidth = 240 } ) => {
             component='nav'
             sx={ { width: { sm: drawerWidth }, flexShrink: { sm: 0 } } }
         >
-
 
             <Drawer
                 variant='permanent'
@@ -34,33 +35,16 @@ export const SideBar = ( { drawerWidth = 240 } ) => {
 
                 <List>
                     {
-                        meses.map( mes => (
-                            <ListItem key={ mes } disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <TurnedInNot />
-                                    </ListItemIcon>
-                                    <Grid container>
-                                        <ListItemText primary={ mes } />
-                                        <ListItemText secondary={ 'Loren Insert Line, Loren Insert Line' } />
-                                    </Grid>
-                                </ListItemButton>
-                            </ListItem>
+                        notes.map( note => (
+                            <SideBarItem key={ note.id } { ...note } />
                         ) )
                     }
                 </List>
-
 
             </Drawer>
 
         </Box>
 
-
-
-
     )
-
-
-
 
 }

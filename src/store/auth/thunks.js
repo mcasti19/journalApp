@@ -1,28 +1,30 @@
-import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, signInWithGitHub, signInWithGoogle } from '../../firebase/providers';
+import {
+    loginWithEmailPassword,
+    logoutFirebase,
+    registerUserWithEmailPassword,
+    signInWithGitHub,
+    signInWithGoogle
+} from '../../firebase/providers';
+import { clearNotesLogout } from '../journal';
+
 import { checkingCredentials, logout, login } from './';
 
 export const checkingAuthentication = () => {
     return async ( dispatch ) => {
-
         dispatch( checkingCredentials() );
-
     }
 }
 
 export const startGitHubSignIn = () => {
     return async ( dispatch ) => {
-
         dispatch( checkingCredentials() );
 
         const result = await signInWithGitHub();
         if ( !result.ok ) return dispatch( logout( result.errorMessage ) );
 
         dispatch( login( result ) )
-
     }
 }
-
-
 
 export const startGoogleSignIn = () => {
     return async ( dispatch ) => {
@@ -33,7 +35,6 @@ export const startGoogleSignIn = () => {
         if ( !result.ok ) return dispatch( logout( result.errorMessage ) );
 
         dispatch( login( result ) )
-
     }
 }
 
@@ -48,14 +49,11 @@ export const startCreatingUserWithEmailPassword = ( { email, password, displayNa
 
         // dispatch( login( result ) );
         dispatch( login( { uid, displayName, email } ) );
-
     }
 }
 
 export const startLoginWithEmail = ( { email, password } ) => {
-
     return async ( dispatch ) => {
-
         dispatch( checkingCredentials() );
 
         const result = await loginWithEmailPassword( { email, password } );
@@ -71,7 +69,7 @@ export const startLoginWithEmail = ( { email, password } ) => {
 export const startLogout = () => {
     return async ( dispatch ) => {
         await logoutFirebase();
-
+        dispatch( clearNotesLogout() );
         dispatch( logout() );
     }
 }

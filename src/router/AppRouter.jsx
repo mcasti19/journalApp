@@ -9,6 +9,7 @@ import { useCheckAuth } from '../hooks';
 
 export const AppRouter = () => {
 
+    //! TODO ESTO ABAJO SE MOVIÓ A UN CUSTOM HOOK LLAMADO useCheckAuth para poder quitar esa logica de aqui. 
     // const { status } = useSelector( state => state.auth );
 
     // const dispatch = useDispatch();

@@ -9,6 +9,14 @@ export const useForm = ( initialForm = {}, formValidations = {} ) => {
         createValidator();
     }, [formState] )
 
+
+    //! ESTE EFECTO SE ENCARGA DE MOSTRAR EL CAMBIO AL HACER CLICK EN LAS NOTAS, CUANDO EL INICIALFORM CAMBIA
+    //! SE ACTUALIZA EL INICIALFORM CON EL NUEVO VALOR (EL DE LA NUEVA NOTA CLICKEADA)
+    useEffect( () => {
+        setFormState( initialForm )
+    }, [initialForm] )
+
+
     const isFormValid = useMemo( () => {
 
         for ( const formValue of Object.keys( formValidation ) ) {
