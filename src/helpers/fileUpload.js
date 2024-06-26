@@ -2,7 +2,8 @@
 
 export const fileUpload = async ( file ) => {
 
-    if ( !file ) throw new Error( 'No existe ningun archivo para subir' );
+    // if ( !file ) throw new Error( 'No existe ningun archivo para subir' );
+    if ( !file ) return null;
 
     const cloudUrl = 'https://api.cloudinary.com/v1_1/demxdolo4/upload';
 
@@ -22,13 +23,14 @@ export const fileUpload = async ( file ) => {
         if ( !resp.ok ) throw new Error( 'No se pudo subir la imagen' );
 
         const cloudResp = await resp.json();
-        console.log( { cloudResp } );
+        // console.log( { cloudResp } );
 
         return cloudResp.secure_url;
 
     } catch ( error ) {
         // console.log( error );
-        throw new Error( error.message );
+        // throw new Error( error.message );
+        return null;
 
     }
 

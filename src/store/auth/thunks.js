@@ -43,12 +43,12 @@ export const startCreatingUserWithEmailPassword = ( { email, password, displayNa
 
         dispatch( checkingCredentials() );
 
-        // const result = await registerUserWithEmailPassword({ email, password, displayName });
-        const { ok, uid, errorMessage } = await registerUserWithEmailPassword( { email, password, displayName } );
-        if ( !ok ) return dispatch( logout( { errorMessage } ) );
+        const result = await registerUserWithEmailPassword( { email, password, displayName } );
+        // const { ok, uid, errorMessage } = await registerUserWithEmailPassword( { email, password, displayName } );
+        if ( !result.ok ) return dispatch( logout( result.errorMessage ) );
 
-        // dispatch( login( result ) );
-        dispatch( login( { uid, displayName, email } ) );
+        dispatch( login( result ) );
+        // dispatch( login( { uid, displayName, email } ) );
     }
 }
 

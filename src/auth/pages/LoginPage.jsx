@@ -1,8 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { Facebook, GitHub, Google, Password, X } from "@mui/icons-material";
-import { Button, Grid, TextField, Typography, Link, Alert } from "@mui/material";
+
+import Google from '@mui/icons-material/Google';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+
+
+// import { Facebook, GitHub, Google, Password, X } from "@mui/icons-material";
+// import { Button, Grid, TextField, Typography, Link, Alert } from "@mui/material";
 
 import { useForm } from "../../hooks/useForm";
 import { AuthLayout } from "../layout/AuthLayout";
@@ -26,6 +36,8 @@ export const LoginPage = () => {
 
     const onSubmit = ( event ) => {
         event.preventDefault();
+
+        // console.log( 'SUBMIT', formState );
         dispatch( startLoginWithEmail( formState ) );
     }
 
@@ -34,16 +46,14 @@ export const LoginPage = () => {
         dispatch( startGoogleSignIn() )
     }
 
-    const onGitHubSingIn = () => {
-        console.log( 'OnGitHubSingIn' );
-        dispatch( startGitHubSignIn() )
-    }
-
-
     return (
-        <AuthLayout title="Login">
+        <AuthLayout title="Login " >
 
-            <form action="" onSubmit={ onSubmit } className="animate__animated animate__fadeIn ">
+            <form
+                aria-label="submit-form"
+                action="" onSubmit={ onSubmit }
+                className="animate__animated animate__fadeIn"
+            >
                 <Grid container>
 
                     <Grid item xs={ 12 } sx={ { mt: 2 } }>
@@ -62,6 +72,9 @@ export const LoginPage = () => {
 
                     <Grid item xs={ 12 } sx={ { mt: 2 } } >
                         <TextField
+                            inputProps={
+                                { 'data-testid': 'password' }
+                            }
                             label="Contraseña"
                             type="password"
                             placeholder="tu contraseña"
@@ -96,6 +109,7 @@ export const LoginPage = () => {
 
                         <Grid item xs={ 12 } sm={ 6 }>
                             <Button
+                                aria-label="google-btn"
                                 onClick={ onGoogleSingIn }
                                 variant="contained"
                                 fullWidth
@@ -107,7 +121,7 @@ export const LoginPage = () => {
                         </Grid>
 
 
-                        <Grid item xs={ 12 } >
+                        {/* <Grid item xs={ 12 } >
                             <Button
                                 // onClick={ onGitHubSingIn }
                                 variant="contained"
@@ -129,7 +143,6 @@ export const LoginPage = () => {
                                 sx={ { backgroundColor: 'black' } }
                             >
                                 <X />
-                                {/* <Typography sx={ { ml: 1 } }></Typography> */ }
                             </Button>
                         </Grid>
 
@@ -143,7 +156,7 @@ export const LoginPage = () => {
                                 <Facebook />
                                 <Typography sx={ { ml: 1 } }>FaceBook</Typography>
                             </Button>
-                        </Grid>
+                        </Grid> */}
 
                     </Grid>
 
